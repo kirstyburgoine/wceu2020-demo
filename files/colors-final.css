@@ -1,0 +1,198 @@
+:root {
+	--brand-primary: #27509F;
+	--brand-secondary: #F59E00;
+	--brand-tertiary: #F4EDE4;
+	--default-background: #fff;
+	--default-text: --brand-primary;
+}
+
+@media ( prefers-color-scheme: dark ) {
+	:root {
+		--brand-primary: #F59E00;
+		--brand-secondary: #27509F;
+		--brand-tertiary: #000022;
+		--default-background: #000;
+		--default-text: #F4EDE4;
+		--default-text-bright: #fff;
+	}
+}
+
+
+/**
+ * These are some specific colour changes to tweak dark mode. 
+ *
+ * These are needed because this site has been downloaded from the internet 
+ * so all of the CSS is the compiled, outputted version and getting around 
+ * specificty is made more difficult.
+ *
+ * When a site has been designed to have both light and dark colour palettes,
+ * the strategy for using custom properties would be better defined so that 
+ * you would not need apply different custom properties to selectors, 
+ * as you would with sass variables, like this. 
+ *
+ * Instead you could scope custom properties to selectors and apply the root 
+ * colours based on the area of the site and the colour mode chosen. 
+ * For example:
+ *
+ * :root {
+ *		--brand-primary-light: #27509F;
+ *		--brand-secondary-light: #F59E00;
+ *		--brand-tertiary-light: #F4EDE4;
+ *
+ *		--brand-primary-dark: #F59E00;
+ *		--brand-secondary-dark: #27509F;
+ *		--brand-tertiary-dark: #000022;
+ * }
+ *
+ * .header {
+ *		--header-background: --brand-primary-light;
+ *
+ *		@media ( prefers-color-scheme: dark ) {
+ *			--header-background: --brand-primary-dark;
+ *		}
+ *
+ *		background-color: var( --header-background );
+ * }
+ *
+ * !important is used in this file specifically to override the main 
+ * stylesheets that have been downloaded and are more specific. 
+ * This is not a recommended usage with CSS Custom Properties.
+ */
+
+body {
+	background-color: var( --default-background ) !important;
+}
+
+/** 
+ * Wrapping all colour changes inside this media query is not best practice.
+ * This is purely because of specifity issues trying to demo the WCEU2020 page.
+ */
+@media ( prefers-color-scheme: dark ) {
+	.wp-block-media-text__media img,
+	.wp-block-latest-posts__featured-image { 
+		filter:
+			brightness(.8)
+			contrast(1.2);
+	}
+	/**
+	* Header & Navigation
+	*/
+	.site-header {
+		background-color: var( --brand-secondary ) !important;
+		color: var( --default-text ) !important;
+	}
+
+	.main-navigation .menu .menu-item.current-menu-item > a {
+		color: var( --default-text ) !important;
+	}
+
+	.main-navigation .menu .menu-item.emphasised > a {
+		background-color: var( --brand-primary ) !important;
+		color: var( --default-text-bright ) !important;
+	}
+
+	.more-info {
+		color: var( --default-text ) !important;
+	}
+
+	/**
+	* Hero Area
+	*/
+	.home-header {
+		/**
+		* Rescope the value of --brand-primary so that all  
+		* elements in the home-header are white instead of orange.
+		*/
+		--brand-primary: --default-text;
+		background-color: var( --brand-tertiary ) !important;
+	}
+
+	.wceuicon .dots .dot,
+	.wceuicon .dots .underscore {
+		background-color: var( --default-text-bright ) !important;
+	}
+
+	.home-header .wp-block-button__link {
+		/**
+		* Reset the --primary-brand var for the get ticket button only.
+		*/
+		--brand-primary: #F59E00;
+		background-color: var( --brand-primary ) !important;
+		color: var( --default-text-bright ) !important;
+		box-shadow: -0.25em 0.25em 0 var( --brand-secondary ) !important;
+	}
+
+	/**
+	* Post Blocks.
+	*/
+	.wp-block-media-text,
+	.wp-block-group {
+		color: var( --default-text ) !important;
+	}
+
+	/**
+	* Read more & view all buttons.
+	*/
+	.wp-block-button.is-style-outline .wp-block-button__link, .wp-block-button__link.is-style-outline {
+		color: var( --brand-primary ) !important;
+	}
+
+	/**
+	* Latest News block.
+	*/
+	.wp-block-latest-posts.is-grid,
+	.wp-block-latest-posts.is-grid a{
+		color: var( --default-text ) !important;
+	}
+
+	.wp-block-latest-posts.is-grid .wp-block-latest-posts__post-date {
+		color: var( --brand-primary ) !important;
+	}
+
+	.wp-block-latest-posts.is-grid li:focus, .wp-block-latest-posts.is-grid li:focus-within, .wp-block-latest-posts.is-grid li:hover {
+		background-color: var( --brand-secondary ) !important;
+	}
+
+	.wp-block-latest-posts.is-grid .wp-block-latest-posts__post-excerpt a {
+		border-color: var( --brand-primary ) !important;
+	}
+
+	/**
+	* Footer Area
+	*/
+	#footer-widgets {
+		background-color: var( --brand-secondary ) !important;
+		color: var( --default-text ) !important;
+	}
+
+	.footer-widgets-block .widget-title,
+	.footer-widgets-block .widget_nav_menu .menu .menu-item a,
+	.footer-widgets-block p {
+		color: var( --default-text ) !important;
+	}
+
+	.footer-widgets-block input,
+	.footer-widgets-block select,
+	.footer-widgets-block textarea {
+		border-color: var( --brand-tertiary ) !important;
+		color: var( --default-text ) !important;
+	}
+
+	::placeholder {
+		color: var( --default-text ) !important;  
+	}
+
+	.footer-widgets-block button, 
+	.footer-widgets-block input[type="submit"] {
+		background-color: var( --brand-tertiary ) !important;
+		border-color: var( --brand-tertiary ) !important;
+		color: var( --default-text ) !important;
+	}
+
+	/**
+	* Site Credits
+	*/
+	.site-info a {
+		color: var( --default-text ) !important;
+	}
+}
